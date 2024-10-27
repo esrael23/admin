@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dashboard-container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .stat {
+      flex: 1;
+      padding: 15px;
+      font-size: 20px;
+      color: #666;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 32px;
+      color: #4CAF50;
+    }
+
+    .charts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .chart-container {
+      width: 100%;
+      max-width: 450px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>Admin Dashboard</h1>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>150</strong>
+        Total Requests
+      </div>
+      <div class="stat">
+        <strong>80</strong>
+        Prayed Requests
+      </div>
+      <div class="stat">
+        <strong>70</strong>
+        Pending Requests
+      </div>
+    </div>
+
+    <div class="charts">
+      <!-- Doughnut Chart -->
+      <div class="chart-container">
+        <h3>Prayer Requests Status</h3>
+        <canvas id="doughnutChart"></canvas>
+      </div>
+
+      <!-- Bar Chart -->
+      <div class="chart-container">
+        <h3>Monthly Requests</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+
+      <!-- Line Chart -->
+      <div class="chart-container">
+        <h3>User Engagement</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Doughnut Chart
+    const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+    new Chart(doughnutCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Prayed', 'Pending'],
+        datasets: [{
+          data: [80, 70],
+          backgroundColor: ['#4CAF50', '#FFB300'],
+          borderColor: '#fff',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+          tooltip: {
+            enabled: true
+          }
+        }
+      }
+    });
+
+    // Bar Chart
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Requests',
+          data: [20, 30, 40, 50, 60, 70],
+          backgroundColor: '#42A5F5'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: { beginAtZero: true },
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // Line Chart
+    const lineCtx = document.getElementById('lineChart').getContext('2d');
+    new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        datasets: [{
+          label: 'User Activity',
+          data: [15, 25, 20, 30],
+          borderColor: '#FF6384',
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: { beginAtZero: true },
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
